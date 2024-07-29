@@ -1,0 +1,106 @@
+--create table employee (empid number, ename varchar2(10), eaddress varchar2(10), hiredate date, salary number, managerid number)
+--create table department (deptid number, deptname varchar2(20))
+--desc employee
+--desc department
+--alter table employee add constraints pykyemp primary key(empid)
+--alter table department add constraints pykydept primary key(deptid)
+--alter table employee add deptid number
+--alter table employee add constraints fykyemp foreign key(deptid) references department(deptid)
+
+--insert into department values(10, 'Accounting');
+--insert into department values(20, 'HR');
+--insert into department values(30, 'Finance');
+--insert into department values(40, 'Health');
+--commit;
+--rollback;
+--select * from department
+--desc employee
+--select sysdate from dual
+--insert into employee values(101, 'King', 'Pune', '22-Jun-22', 10000, NULL, 10);
+--insert into employee values(102,'Kocchar','Banglore','01-Jan-23',45000,101,10);
+--insert into employee values(103,'Jay','Delhi','27-Jun-23',40000,102,20);
+--insert into employee values(104,'Nikhil','Hydrabad','22-July-22',30000,103,20);
+--commit;
+--select * from employee;
+--select * from employee order by salary desc
+--select * from employee  where salary >=40000 and salary <=46000;
+--select * from employee where salary between 40000 and 46000;
+--select * from employee where managerid is null;
+--select * from employee where managerid is not null;
+--select ename,salary,nvl(to_char(managerid),'no manager') from employee where managerid is null;
+--select * from employee where ename like '%a%';
+--select * from employee where ename like '_a%';
+--select count('A') from employee;
+--select count(managerid) from employee;
+--select max(Salary) from employee group by deptid having max(salary)>40000;
+--select avg(salary) from employee;
+--select min(salary) from employee;
+--select sum(salary) from employee;
+--Inner Traditional join
+--select ename,deptname from employee, department where employee.deptid=department.deptid;
+--join On
+--select ename,deptname from employee join department on employee.deptid=department.deptid;
+--join Using
+--select ename,deptname from employee join department using(deptid);
+--select ename,deptname from employee natural join department;
+
+--select ename,nvl(deptname,'No department allocated')
+--from employee ,department
+--where employee.deptid=department.deptid(+);
+-- 
+--select ename,nvl(deptname,'No department allocated')
+--from employee left outer join department
+--on employee.deptid=department.deptid;
+-- 
+--select nvl(ename,'no employee allocated'),deptname
+--from employee ,department
+--where employee.deptid(+)=department.deptid;
+-- 
+--select nvl(ename,'no employee allocated'),deptname
+--from employee right outer join department
+--on employee.deptid=department.deptid;
+-- 
+--select nvl(ename,'no employee allocated'),deptname
+--from employee ,department
+--where employee.deptid(+)=department.deptid(+);
+-- 
+--select nvl(ename,'no employee allocated'),nvl(deptname,'no dept allocated')
+--from employee full outer join department
+--on employee.deptid=department.deptid;
+
+--select e.ename || ' Reports to ' || m.ename
+--from employee e,employee m
+--where e.managerid=m.empid;
+--
+--select concat('Hello' ,concat('World ',' Today')) from dual;
+-- 
+--select upper(ename) from employee;
+--select lower(ename) from employee;
+--select initcap(ename) from employee;
+--
+--select trim (' hello world ') from dual;
+--select ltrim(' hello world  ') from dual;
+--select rtrim('hello world  ') from dual;
+-- 
+--select lpad('hello',10,'*') from dual;
+--select rpad('hello',10,'*') from dual;
+--select lpad('helloworld',10,'*') from dual;
+-- 
+--select substr('helloworld',2,5) from dual;
+--select substr('helloworld', -2,5) from dual;
+--select instr ('hellowolrd','l',3,3) from dual;
+--
+--select round(15.54,0) from dual;
+--select round(15.54,1) from dual; 
+--select round(15.54,-1) from dual;
+--select round(55.54,-2) from dual;
+--select trunc(15.54,0) from dual;
+--select trunc(15.54,1) from dual;
+--select trunc(15.54,-1) from dual;
+--select trunc(15.54,-2) from dual;
+--select floor(15.52) from dual;
+--select ceil(15.52) from dual;
+
+
+
+

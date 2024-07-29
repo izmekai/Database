@@ -1,0 +1,291 @@
+--create table  emp (empid number,ename varchar2(10),eaddress varchar2(10), hiredate date,salary number, managerid number)
+--Create table dept (deptid number,deptname varchar2(20))
+--Desc Emp
+--Desc dept
+--alter table emp add constraints  pkemp primary key(empid)
+--alter table dept add constraints  pkdept primary key(deptid)
+--alter table emp add  deptid number
+--alter table emp add constraints fkemp foreign key(deptid) references dept(deptid)
+ 
+insert into dept values(10,'Accounting');
+insert into dept values(20,'HR');
+insert into dept values(30,'Finance');
+insert into dept values (40,'Health');
+commit;
+rollback
+select * from emp
+insert into emp values(101,'King','Pune','22-Jun-22',50000,NULL,10);
+insert into emp values(102,'Kocchar','Banglore','01-Jan-23',45000,101,10);
+insert into emp values(103,'Jay','Delhi','27-Jun-23',40000,102,20);
+insert into emp values(104,'Nikhil','Hydrabad','22-July-22',30000,103,20);
+commit
+ 
+--select * from emp where empid=101 or empid=103;
+--select * from emp where empid in (101,103)
+--select * from emp;
+--select * from emp order by salary desc
+--select * from emp where salary >=40000 and salary <=46000;
+--select * from emp where salary between 40000 and 46000;
+--select * from emp where managerid is null;
+--select * from emp where managerid is not null;
+select ename,salary,nvl(to_char(managerid),'no manager') from emp where managerid is null;
+ 
+ 
+ 
+select * from emp where ename like '%a%';
+select * from emp where ename like '_a%';
+select count('A') from emp;
+select count(managerid) from emp;
+select max(Salary) from emp group by deptid having max(salary)>40000;
+select avg(salary) from emp;
+select min(salary) from emp;
+select sum(salary) from emp;
+ 
+ 
+--Inner Traditional join
+select ename,deptname
+from emp,dept
+where emp.deptid=dept.deptid;
+--join On
+select ename,deptname
+from emp join dept
+on emp.deptid=dept.deptid;
+--Join Using
+select ename,deptname
+from emp join dept
+using(deptid);
+select ename,deptname
+from emp natural join dept
+ 
+ 
+ 
+select ename,nvl(deptname,'No department allocated')
+from emp ,dept
+where emp.deptid=dept.deptid(+);
+select ename,nvl(deptname,'No department allocated')
+from emp left outer join dept
+on emp.deptid=dept.deptid;
+select nvl(ename,'no employee allocated'),deptname
+from emp ,dept
+where emp.deptid(+)=dept.deptid;
+select nvl(ename,'no employee allocated'),deptname
+from emp right outer join dept
+on emp.deptid=dept.deptid
+select nvl(ename,'no employee allocated'),deptname
+from emp ,dept
+where emp.deptid=dept.deptid(+);
+select nvl(ename,'no employee allocated'),nvl(deptname,'no dept allocated')
+from emp full outer join dept
+on emp.deptid=dept.deptid
+ 
+ 
+select e.ename || ' Reports to ' || m.ename
+from emp e,emp m
+where e.managerid=m.empid
+
+select concat('Hello' ,concat('World ',' Today')) from dual;
+select upper(ename) from emp;
+select lower(ename) from emp;
+select initcap(ename) from emp
+select trim (' hello world ') from dual
+select ltrim(' hello world  ') from dual;
+select rtrim('hello world  ') from dual;
+select lpad('hello',10,'*') from dual
+select rpad('hello',10,'*') from dual;
+select lpad('helloworld',10,'*') from dual
+select substr('helloworld',2,5) from dual
+select substr('helloworld', -2,5) from dual
+select instr ('hellowolrd','l',3,3) from dual
+ 
+ 
+select round(15.54,0) from dual
+select round(15.54,1) from dual
+select round(15.54,-1) from dual
+select round(55.54,-2) from dual
+select trunc(15.54,0) from dual
+select trunc(15.54,1) from dual
+select trunc(15.54,-1) from dual
+select trunc(15.54,-2) from dual
+ 
+ 
+ 
+select sysdate from dual
+select current_date from dual
+select add_months(sysdate,2) from dual
+select current_timestamp from dual
+select extract(year from sysdate) from dual
+select extract(month from sysdate) from dual
+select extract(day from sysdate) from dual
+select last_day('26-JUL-2024') from dual
+select months_between(sysdate,'26-Dec-2024') from dual
+select next_day(sysdate,'Monday') from dual
+--select dayname(sysdate) from dual
+select to_char(sysdate,'dd-Month-yyyy') from dual
+select to_char(sysdate,'Day-dd-Month-yyyy') from dual
+Select to_char(sysdate,'YYYY-MM-DD HH24:MI:SS') from dual
+select to_char(sysdate,'ddspth-MM-Year') from dual
+select to_char(sysdate,'DDspth-MONTH-YEAR') from dual
+ 
+ 
+ 
+Create table empnew as select * from emp
+create table empnew10 as select * from emp where 1=2
+desc empnew10
+select * from empnew;
+select * from empnew10;
+
+select floor(15.52) from dual
+select ceil(15.52) from dual
+ 
+ 
+ 
+alter table empnew drop column deptid 
+drop table empnew10;
+alter table empnew modify eaddress varchar2(20) not null;
+Truncate table empnew
+select * from emp
+delete from emp
+update emp
+set salary=60000
+where empid=101
+rollback
+commit
+ 
+ 
+ 
+[10:03 AM] TApte (Unverified)
+select ename,salary from emp where deptid=10
+ 
+union all
+ 
+select to_char(empid),salary from emp where deptid=20
+
+select ename,salary from emp where deptid in (10,20)
+ 
+Intersect
+ 
+select ename,salary from emp where deptid=20
+
+
+select ename,salary from emp where deptid=10
+union all
+select to_char(empid),salary from emp where deptid=20
+
+select ename,salary from emp where deptid in (10,20)
+Intersect
+select ename,salary from emp where deptid=20
+Last read
+--Normal Query select ename from emp wher... by TApte (Unverified)
+TApte (Unverified)
+10:35 AM
+--Normal Query
+select ename from emp where deptid IN (select deptid from dept)
+--inline view`
+select ename from ( select ename  from emp where salary >=40000) Empquery
+
+select ename from emp where salary > ANY (select min(salary) from emp group by deptid);
+select ename from emp E where salary > ALL (select min(salary) from emp M group by deptid)
+and deptid in (select deptid from dept)
+select ename from emp E where (salary,deptid) IN (select deptid,min(salary) from emp M group by deptid)
+
+create table empnew as select * from emp
+update  empnew
+set salary =
+(select salary from  emp where empnew.salary=emp.salary and emp.empid=101)
+has context menu
+ 
+ 
+create or replace view empv as select empid,ename from emp ;
+create or replace view empvread as select empid,ename from emp with read only ;
+insert into empvread values (106,'AAA');
+rollback
+select * from emp
+alter table emp add constraints cksal check(salary<70000)
+--alter table emp drop constraints cksal
+
+create or replace view empsalv as select empid,salary from emp where salary <70000 with check option
+update empsalv
+set salary=69000
+where empid=101
+
+
+/*begin
+dbms_output.put_line('we are writing simple block');
+end;*/
+ 
+/*
+declare
+v_ename varchar2(15);
+v_salary Number;
+begin
+select ename,salary into v_ename,v_salary from emp where empid=101;
+dbms_output.put_line('Employee Name is '|| v_ename || ' Salary is '||v_salary);
+end; */
+ 
+declare
+v_ename varchar2(15);
+v_salary Number;
+cursor empcur is select ename,salary from emp;
+begin
+open  empcur;
+Loop
+fetch empcur into v_ename,v_salary;
+dbms_output.put_line('Employee Name is '|| v_ename || ' Salary is '||v_salary);
+exit when (empcur%notfound);
+end loop;
+end;
+
+declare
+v_ename varchar2(15);
+v_salary Number;
+begin
+select ename,salary into v_ename,v_salary from emp;
+dbms_output.put_line('Employee Name is '|| v_ename || ' Salary is '||v_salary);
+exception
+when too_many_rows then
+dbms_output.put_line('Please use cursor');
+ 
+when others then
+dbms_output.put_line('Other exceptions');
+end;
+
+create or replace procedure dispname(p_empid number)
+is
+v_empname varchar2(15);
+begin
+select ename into v_empname from emp where empid=p_empid;
+dbms_output.put_line('Empname is'|| v_empname);
+end;
+  
+execute dispname(101)
+
+create or replace procedure query_emp(p_empid IN number,p_ename OUT varchar2,p_salary OUT number)
+is
+begin
+select ename,salary into p_ename,p_salary from emp where empid=101;
+end;
+ 
+ 
+declare
+v_ename varchar2(15);
+v_salary number;
+begin
+query_emp(101,v_ename,v_salary);
+dbms_output.put_line('Employee name is'|| v_ename || 'salary is' ||v_salary);
+end;
+ 
+ 
+create or replace procedure incsal(p_salinc IN OUT number) is
+begin
+p_salinc:=p_salinc*2;
+end;
+ 
+ 
+VARIABLE v_salinc number;
+execute :v_salinc:=1000;
+begin
+incsal(:v_salinc);
+end;
+ 
+PRINT v_salinc
+12:29---------------------------------------------------------------------------------------------------------------------------------------
